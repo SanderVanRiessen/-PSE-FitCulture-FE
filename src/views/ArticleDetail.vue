@@ -1,8 +1,7 @@
-<!-- ArticleDetail.vue -->
 <template>
-  <div>
+  <div class="article-container">
     <h1>{{ article.title }}</h1>
-    <div>
+    <div class="article-content">
       <Markdown :source="article.body"/>
     </div>
   </div>
@@ -40,4 +39,16 @@ export default {
 };
 </script>
 
+<style scoped>
+.article-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 20px auto;
+  max-width: 800px; /* Optional: Set maximum width for the article container */
+}
 
+.article-content {
+  margin-top: 20px; /* Optional: Add some margin between title and content */
+}
+</style>

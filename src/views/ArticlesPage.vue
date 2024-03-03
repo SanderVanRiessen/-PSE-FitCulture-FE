@@ -106,6 +106,8 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
+  height: 100%; /* Set a fixed height for each article block */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 .article-info {
