@@ -14,11 +14,15 @@ import StyleClass from "primevue/styleclass";
 import Tooltip from "primevue/tooltip";
 import Password from "primevue/password";
 import Divider from "primevue/divider";
+import axios from "axios";
 
 import "@/assets/styles.scss";
 
 const app = createApp(App);
 app.use(PrimeVue, { ripple: true });
+
+axios.defaults.baseURL = "http://localhost:8087";
+
 app.directive("tooltip", Tooltip);
 app.directive("badge", BadgeDirective);
 app.directive("ripple", Ripple);
