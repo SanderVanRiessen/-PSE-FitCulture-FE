@@ -19,13 +19,32 @@ import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
 
 import { VueQueryPlugin } from "@tanstack/vue-query";
+import { createStore } from "vuex";
 
 import "@/assets/styles.scss";
+
+const store = createStore({
+  state: {
+    token: null,
+  },
+  mutations: {
+    setToken(state, token) {
+      state.token = token;
+    },
+  },
+  actions: {},
+  getters: {
+    isLoggedIn(state) {
+      return !!state.token;
+    },
+  },
+});
 
 const app = createApp(App);
 app.use(PrimeVue, { ripple: true });
 app.use(VueQueryPlugin);
 app.use(ToastService);
+app.use(store);
 app.directive("tooltip", Tooltip);
 app.directive("badge", BadgeDirective);
 app.directive("ripple", Ripple);

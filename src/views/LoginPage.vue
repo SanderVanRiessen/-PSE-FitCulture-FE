@@ -75,6 +75,7 @@ const { mutate } = useMutation({
 
 <script>
 import { useToast } from "primevue/usetoast";
+import { mapMutations } from "vuex";
 import { router } from "@/router";
 
 export default {
@@ -88,6 +89,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["setToken"]),
     goToRegister() {
       router.push("/register");
     },
@@ -99,7 +101,7 @@ export default {
         },
         {
           onSuccess: (data) => {
-            localStorage.setItem("jwt", data.jwt);
+            this.setToken(data.jwt);
             this.toast.add({
               severity: "success",
               summary: "Success",
