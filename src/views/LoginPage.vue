@@ -31,6 +31,7 @@
         <InputText
           id="password1"
           type="password"
+          v-model="password"
           required
           toggleMask
           class="w-full mb-3"
@@ -52,23 +53,71 @@
           >
         </div>
 
-        <Button label="Sign In" icon="pi pi-user" class="w-full"></Button>
+        <Button
+          @click="login(mutate)"
+          label="Sign In"
+          icon="pi pi-user"
+          class="w-full"
+        ></Button>
       </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { useMutation } from "@tanstack/vue-query";
+import loginFetch from "@/api/authentication/loginFetch";
+
+const { mutate } = useMutation({
+  mutationFn: (userLogin) => loginFetch(userLogin),
+});
+</script>
+
 <script>
+import { useToast } from "primevue/usetoast";
+import { router } from "@/router";
+
 export default {
   name: "LoginPage",
   data() {
     return {
+      email: "",
+      password: "",
       checked: false,
+      toast: useToast(),
     };
   },
   methods: {
     goToRegister() {
-      this.$router.push("/register");
+      router.push("/register");
+    },
+    login(mutate) {
+      mutate(
+        {
+          username: this.email,
+          password: this.password,
+        },
+        {
+          onSuccess: (data) => {
+            localStorage.setItem("jwt", data.jwt);
+            this.toast.add({
+              severity: "success",
+              summary: "Success",
+              detail: "Logged in successfully",
+              life: 3000,
+            });
+            router.push("/");
+          },
+          onError: (error) => {
+            this.toast.add({
+              severity: "error",
+              summary: "Error",
+              detail: error,
+              life: 3000,
+            });
+          },
+        }
+      );
     },
   },
 };

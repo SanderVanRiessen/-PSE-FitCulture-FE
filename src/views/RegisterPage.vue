@@ -70,14 +70,30 @@
           <label for="name" class="block text-900 font-medium mb-2">Name</label>
           <InputText id="name" type="text" required />
         </div>
-
-        <Button label="Register" icon="pi pi-user" class="w-full mt-5"></Button>
+        <Button
+          @click="registerUser(mutate)"
+          label="Register"
+          icon="pi pi-user"
+          class="w-full mt-5"
+        />
       </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { useMutation } from "@tanstack/vue-query";
+import registerFetch from "@/api/authentication/registerFetch";
+
+const { mutate } = useMutation({
+  mutationFn: (user) => registerFetch(user),
+});
+</script>
+
 <script>
+import { useToast } from "primevue/usetoast";
+import { router } from "@/router";
+
 export default {
   name: "RegisterPage",
   data() {
@@ -88,6 +104,7 @@ export default {
       nameError: "",
       password: "",
       passwordError: "",
+      toast: useToast(),
     };
   },
   methods: {
@@ -97,6 +114,38 @@ export default {
     validatePassword(value) {
       this.passwordError = !value.match(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
+      );
+    },
+    registerUser(mutate) {
+      if (this.emailError || this.passwordError) {
+        return;
+      }
+      mutate(
+        {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+          role: "user",
+        },
+        {
+          onSuccess: () => {
+            this.toast.add({
+              severity: "success",
+              summary: "Success",
+              detail: "User registered successfully",
+              life: 3000,
+            });
+            router.push("/");
+          },
+          onError: (error) => {
+            this.toast.add({
+              severity: "error",
+              summary: "Error",
+              detail: error,
+              life: 3000,
+            });
+          },
+        }
       );
     },
   },
