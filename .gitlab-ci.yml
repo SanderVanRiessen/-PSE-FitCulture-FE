@@ -1,9 +1,23 @@
+image: node:18
+
+cache:
+  key:
+    files:
+      - pnpm-lock.yaml
+  paths:
+    - node_modules/
+    - .pnpm-store/
+
+before_script:
+  - corepack enable
+  - corepack prepare pnpm@latest --activate
+  - pnpm config set store-dir .pnpm-store
+
 stages:
   - build
   - lint
 
 build:
-  image: node:18
   stage: build
   tags:
     - hva
@@ -16,8 +30,8 @@ build:
       - dist
 
 quality:
-  image: node:18
   stage: lint
+  needs: [build]
   tags:
     - hva
   script:
