@@ -68,7 +68,7 @@
 
         <div class="field flex flex-column w-full">
           <label for="name" class="block text-900 font-medium mb-2">Name</label>
-          <InputText id="name" type="text" required />
+          <InputText v-model="name" id="name" type="text" required />
         </div>
         <Button
           @click="registerUser(mutate)"
@@ -112,7 +112,7 @@ export default {
       this.emailError = !value.includes("@");
     },
     validatePassword(value) {
-      this.passwordError = !value.match(
+      this.passwordError = value.match(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
       );
     },

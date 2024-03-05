@@ -20,6 +20,7 @@ import ToastService from "primevue/toastservice";
 
 import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createStore } from "vuex";
+import axios from "axios";
 
 import "@/assets/styles.scss";
 
@@ -39,6 +40,7 @@ const store = createStore({
     },
   },
 });
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 const app = createApp(App);
 app.use(PrimeVue, { ripple: true });
