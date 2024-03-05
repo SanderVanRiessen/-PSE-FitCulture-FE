@@ -1,6 +1,12 @@
+stages:
+  - build
+  - lint
+
 build:
   image: node:18
   stage: build
+  tags:
+    - hva
   script:
     - pnpm install
     - pnpm run build
@@ -11,7 +17,9 @@ build:
 
 quality:
   image: node:18
-  stage: test
+  stage: lint
+  tags:
+    - hva
   script:
     - pnpm install
     - pnpm run lint
