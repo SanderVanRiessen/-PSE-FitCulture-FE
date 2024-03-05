@@ -1,0 +1,17 @@
+build:
+  image: node:18
+  stage: build
+  script:
+    - pnpm install
+    - pnpm run build
+  artifacts:
+    expire_in: 3 days
+    paths:
+      - dist
+
+quality:
+  image: node:18
+  stage: test
+  script:
+    - pnpm install
+    - pnpm run lint
