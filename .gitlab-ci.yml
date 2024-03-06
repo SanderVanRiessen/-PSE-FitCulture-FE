@@ -12,7 +12,6 @@ before_script:
   - corepack enable
   - corepack prepare pnpm@latest --activate
   - pnpm config set store-dir .pnpm-store
-  - docker info
 
 stages:
   - build
@@ -44,5 +43,6 @@ docker-build:
   tags:
     - hva
   script:
+    - docker info
     - docker build -t gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe .
     - docker push gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe
