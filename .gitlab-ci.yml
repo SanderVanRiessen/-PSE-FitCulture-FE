@@ -8,10 +8,11 @@ cache:
     - node_modules/
     - .pnpm-store/
 
-before_script:
-  - corepack enable
-  - corepack prepare pnpm@latest --activate
-  - pnpm config set store-dir .pnpm-store
+.install_pnpm
+  before_script:
+    - corepack enable
+    - corepack prepare pnpm@latest --activate
+    - pnpm config set store-dir .pnpm-store
 
 stages:
   - build
@@ -20,6 +21,7 @@ stages:
 
 build:
   stage: build
+  extends: .install_pnpm
   tags:
     - hva
   script:
@@ -33,6 +35,7 @@ build:
 quality:
   stage: lint
   needs: [build]
+  extends: .install_pnpm
   tags:
     - hva
   script:
