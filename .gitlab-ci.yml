@@ -47,5 +47,6 @@ docker-build:
   tags:
     - hva
   script:
+    - docker login gitlab.fdmci.hva.nl:5050 -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - docker build -t gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe .
     - docker push gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe
