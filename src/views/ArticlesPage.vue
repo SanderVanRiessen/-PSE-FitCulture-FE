@@ -17,68 +17,83 @@
       <Paginator v-if="articles.length > 0"
                  :totalRecords="articles.length"
                  :rows="rowsPerPage"
-                 :pageLinkSize="3"
-                 :currentPage="currentPage"
                  @page="onPageChange" />
     </div>
   </div>
 </template>
 <script>
-import { onMounted, ref, computed, watch } from 'vue';
+import { onMounted, ref, computed, watch} from 'vue';
 import axios from 'axios';
 import Paginator from 'primevue/paginator';
 import { formatDate } from '@/dateUtils';
 
 export default {
   name: 'ArticlesPage',
-  methods: {formatDate},
-  components: {
-    Paginator
-  },
+  methods: { formatDate },
+  components: { Paginator },
   setup() {
     const articles = ref([]);
     const loading = ref(true);
     const currentPage = ref(1);
     const rowsPerPage = 10;
 
-    // Fetch all articles from the backend
     const fetchArticles = async () => {
       try {
         const response = await axios.get('/articlesHeadlines');
-        articles.value = response.data; // Assuming the response data is the array of articles
-        loading.value = false; // Set loading to false once articles are fetched
-        console.log('Articles fetched successfully:', articles.value);
+        articles.value = response.data;
+        loading.value = false;
+//
       } catch (error) {
         console.error('There was an error fetching the articles:', error);
-        loading.value = false; // Set loading to false in case of error
+        loading.value = false;
       }
     };
 
-    // Computed property to slice articles for current page
     const paginatedArticles = computed(() => {
       const start = (currentPage.value - 1) * rowsPerPage;
       const end = currentPage.value * rowsPerPage;
       return articles.value.slice(start, end);
     });
 
-    // Watch for changes in currentPage and update paginatedArticles accordingly
     watch(currentPage, (newVal, oldVal) => {
       console.log('currentPage changed from', oldVal, 'to', newVal);
+      window.sessionStorage.setItem('currentPage', currentPage.value);
+      console.log(window.sessionStorage.getItem('currentPage'));
+      window.history.replaceState({ currentPage: currentPage.value }, null);
     });
 
+
     const onPageChange = (event) => {
-      currentPage.value = event.page + 1; // Adjusting because Paginator is zero-based
-      console.log('Page changed to:', currentPage.value);
+      currentPage.value = event.page + 1; // Paginator is zero-based
     };
 
-    // Store the current page number in the browser's history state when navigating to the full article
     const storePageNumber = () => {
+      window.sessionStorage.setItem('currentPage', currentPage.value);
       window.history.replaceState({ currentPage: currentPage.value }, null);
     };
 
-    onMounted(fetchArticles);
 
-    return { articles, paginatedArticles, currentPage, rowsPerPage, onPageChange, loading, storePageNumber };
+    onMounted(() => {
+      // Check if there's a page stored in sessionStorage
+      if (window.sessionStorage.getItem('currentPage') === null){
+        currentPage.value = 1;
+      } else {
+        currentPage.value = window.sessionStorage.getItem('currentPage');
+      }
+      // Then fetch the articles
+      fetchArticles();
+    });
+
+
+    return {
+      articles,
+      paginatedArticles,
+      currentPage,
+      rowsPerPage,
+      onPageChange,
+      loading,
+      storePageNumber,
+    };
   }
 };
 </script>
