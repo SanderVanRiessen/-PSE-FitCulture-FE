@@ -6,7 +6,7 @@
     <InputText
       id="password1"
       type="password"
-      v-model="passwordValue"
+      v-model="value"
       required
       toggleMask
       class="w-full mb-3"
@@ -16,11 +16,18 @@
 
 <script>
 export default {
-  props: ["password"],
-  data() {
-    return {
-      passwordValue: this.password,
-    };
+  name: "PasswordInput",
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue;
+      },
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
+    },
   },
 };
 </script>

@@ -4,7 +4,7 @@
     <InputText
       id="email1"
       type="email"
-      v-model="emailValue"
+      v-model="value"
       required
       class="w-full mb-3"
     />
@@ -13,11 +13,18 @@
 
 <script>
 export default {
-  props: ["email"],
-  data() {
-    return {
-      emailValue: this.email,
-    };
+  name: "EmailInput",
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue;
+      },
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
+    },
   },
 };
 </script>

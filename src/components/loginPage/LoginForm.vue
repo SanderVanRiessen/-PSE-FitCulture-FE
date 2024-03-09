@@ -1,7 +1,7 @@
 <template>
   <div>
-    <EmailInput />
-    <PasswordInput />
+    <EmailInput v-model="email" />
+    <PasswordInput v-model="password" />
 
     <div class="flex align-items-center justify-content-between mb-6">
       <RememberMeCheck />
@@ -24,6 +24,9 @@
 <script setup>
 import { useMutation } from "@tanstack/vue-query";
 import loginFetch from "@/api/authentication/loginFetch";
+import RememberMeCheck from "./RememberMeCheck.vue";
+import EmailInput from "./EmailInput.vue";
+import PasswordInput from "./PasswordInput.vue";
 
 const { mutate, isLoading } = useMutation({
   mutationFn: (userLogin) => loginFetch(userLogin),
@@ -44,6 +47,11 @@ export default {
       checked: false,
       toast: useToast(),
     };
+  },
+  components: {
+    EmailInput,
+    PasswordInput,
+    RememberMeCheck,
   },
   methods: {
     ...mapMutations(["setToken"]),
