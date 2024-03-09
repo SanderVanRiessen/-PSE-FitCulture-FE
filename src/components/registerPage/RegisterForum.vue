@@ -2,10 +2,10 @@
   <div>
     <div class="flex flex-row gap-6">
       <EmailInput v-model="email" />
-      <PasswordInput :password="password" />
+      <PasswordInput v-model="password" />
     </div>
 
-    <NameInput :name="name" />
+    <NameInput v-model="name" />
     <Button
       @click="registerUser(mutate)"
       label="Register"
@@ -42,22 +42,29 @@ export default {
   },
   data() {
     return {
-      email: { value: "", error: "" },
-      password: { value: "", error: "" },
-      name: { value: "", error: "" },
+      email: { value: "", error: false },
+      password: { value: "", error: false },
+      name: { value: "", error: false },
       toast: useToast(),
     };
   },
   methods: {
     registerUser(mutate) {
-      if (this.email.error || this.password.error || this.name.error) {
+      const hasError = (input) => {
+        return input.error || input.value.length === 0;
+      };
+      if (
+        hasError(this.email) ||
+        hasError(this.password) ||
+        hasError(this.name)
+      ) {
         return;
       }
       mutate(
         {
-          name: this.name,
-          email: this.email,
-          password: this.password,
+          name: this.name.value,
+          email: this.email.value,
+          password: this.password.value,
           role: "user",
         },
         {

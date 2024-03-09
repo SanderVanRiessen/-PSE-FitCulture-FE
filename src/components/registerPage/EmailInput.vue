@@ -4,12 +4,12 @@
     <InputText
       id="email"
       type="email"
-      v-model="emailValue"
+      v-model="value"
       required
-      v-bind:invalid="emailError > 0"
-      v-on:blur="validateEmail(emailValue)"
+      v-bind:invalid="error > 0"
+      v-on:blur="validateEmail(value)"
     />
-    <small id="username-help" class="mt-1 text-red-600" v-show="emailError"
+    <small id="username-help" class="mt-1 text-red-600" v-show="error"
       >Email is not valid</small
     >
   </div>
@@ -18,16 +18,27 @@
 <script>
 export default {
   name: "EmailInput",
-  props: ["email"],
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue.value;
+      },
+      set(value) {
+        this.$emit("update:modelValue", { value, error: this.error });
+      },
+    },
+  },
   data() {
     return {
-      emailValue: this.email.value,
-      emailError: this.email.error,
+      email: this.modelValue.value,
+      error: this.modelValue.error,
     };
   },
   methods: {
     validateEmail(value) {
-      this.emailError = !value.includes("@");
+      this.error = !value.includes("@");
     },
   },
 };

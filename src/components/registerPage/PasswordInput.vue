@@ -5,12 +5,12 @@
     >
     <Password
       id="passowrd"
-      v-model="passwordValue"
+      v-model="value"
       toggleMask
       required
       type="password"
-      v-bind:invalid="passwordError > 0"
-      v-on:blur="validatePassword(passwordValue)"
+      v-bind:invalid="error > 0"
+      v-on:blur="validatePassword(value)"
       inputClass="w-full"
     >
       <template #header>
@@ -28,7 +28,7 @@
         </ul>
       </template>
     </Password>
-    <small id="password-help" class="mt-1 text-red-600" v-show="passwordError"
+    <small id="password-help" class="mt-1 text-red-600" v-show="error"
       >Password is not valid</small
     >
   </div>
@@ -37,18 +37,29 @@
 <script>
 export default {
   name: "PasswordInput",
-  props: ["password"],
+  props: ["modelValue"],
+  emits: ["update:modelValue"],
+  computed: {
+    value: {
+      get() {
+        return this.modelValue.value;
+      },
+      set(value) {
+        this.$emit("update:modelValue", { value, error: this.error });
+      },
+    },
+  },
   data() {
     return {
-      passwordValue: this.password.value,
-      passwordError: this.password.error,
+      password: this.modelValue.value,
+      error: this.modelValue.error,
     };
   },
   methods: {
     validatePassword(value) {
       const regex =
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[a-zA-Z\d!@#$%^&*()\-_+=]{8,}$/;
-      this.passwordError = !value.match(regex);
+      this.error = !value.match(regex);
     },
   },
 };
