@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex flex-row gap-6">
-      <EmailInput :email="email" />
+      <EmailInput v-model="email" />
       <PasswordInput :password="password" />
     </div>
 

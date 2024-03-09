@@ -1,0 +1,23 @@
+<template>
+  <div>
+    <label for="email1" class="block text-900 font-medium mb-2">Email</label>
+    <InputText
+      id="email1"
+      type="email"
+      v-model="emailValue"
+      required
+      class="w-full mb-3"
+    />
+  </div>
+</template>
+
+<script>
+export default {
+  props: ["email"],
+  data() {
+    return {
+      emailValue: this.email,
+    };
+  },
+};
+</script>
