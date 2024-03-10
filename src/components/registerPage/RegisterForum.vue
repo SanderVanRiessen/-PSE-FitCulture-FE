@@ -51,7 +51,8 @@ export default {
   methods: {
     registerUser(mutate) {
       const hasError = (input) => {
-        return input.error || input.value.length === 0;
+        const isError = input.error || input.value.length === 0;
+        return isError;
       };
       if (
         hasError(this.email) ||

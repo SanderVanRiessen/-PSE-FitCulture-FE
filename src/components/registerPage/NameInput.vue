@@ -1,7 +1,14 @@
 <template>
   <div class="field flex flex-column w-full">
     <label for="name" class="block text-900 font-medium mb-2">Name</label>
-    <InputText v-model="value" id="name" type="text" required />
+    <InputText
+      v-model="value"
+      id="name"
+      type="text"
+      required
+      v-bind:invalid="error > 0"
+      data-testid="name-input"
+    />
   </div>
 </template>
 
@@ -25,11 +32,6 @@ export default {
       name: this.modelValue.value,
       error: this.modelValue.error,
     };
-  },
-  methods: {
-    validateName(value) {
-      this.error = value.length < 3 ?? "Name is too short";
-    },
   },
 };
 </script>

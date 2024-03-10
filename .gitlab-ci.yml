@@ -16,7 +16,7 @@ cache:
 
 stages:
   - build
-  - lint
+  - lint & test
   - docker-build
 
 build:
@@ -33,13 +33,22 @@ build:
       - node_modules/
 
 quality:
-  stage: lint
+  stage: lint & test
   needs: [build]
   extends: .install_pnpm
   tags:
     - hva
   script:
     - pnpm run lint
+
+test:
+  stage: lint & test
+  needs: [build]
+  extends: .install_pnpm
+  tags:
+    - hva
+  script:
+    - pnpm run test
 
 docker-build:
   image: docker:25.0.3

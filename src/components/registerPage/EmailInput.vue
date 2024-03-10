@@ -8,6 +8,7 @@
       required
       v-bind:invalid="error > 0"
       v-on:blur="validateEmail(value)"
+      data-testid="email-input"
     />
     <small id="username-help" class="mt-1 text-red-600" v-show="error"
       >Email is not valid</small

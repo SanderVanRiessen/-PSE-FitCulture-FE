@@ -12,6 +12,8 @@
       v-bind:invalid="error > 0"
       v-on:blur="validatePassword(value)"
       inputClass="w-full"
+      data-testid="password-input"
+      strongRegex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[a-zA-Z\d!@#$%^&*()\-_+=]{8,}"
     >
       <template #header>
         <h6 class="my-1">Pick a password</h6>

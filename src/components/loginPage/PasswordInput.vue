@@ -10,6 +10,7 @@
       required
       toggleMask
       class="w-full mb-3"
+      data-testid="password-input"
     />
   </div>
 </template>
