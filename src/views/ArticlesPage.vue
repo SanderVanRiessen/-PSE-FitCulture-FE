@@ -41,7 +41,7 @@ export default {
     const rowsPerPage = 10;
 
     const fetchArticles = async () => {
-      const response = await axios.get('/articlesHeadlines');
+      const response = await axios.get('/public/articlesHeadlines');
       return response.data;
     };
 
