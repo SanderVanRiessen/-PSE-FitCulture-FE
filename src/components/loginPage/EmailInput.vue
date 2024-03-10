@@ -7,6 +7,7 @@
       v-model="value"
       required
       class="w-full mb-3"
+      data-testid="email-input"
     />
   </div>
 </template>
