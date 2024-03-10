@@ -25,7 +25,7 @@ export default {
     const fetchArticle = async () => {
       const id = route.params.id;
       try {
-        const response = await axios.get(`/article/${id}`);
+        const response = await axios.get(`/public/article/${id}`);
         article.value = response.data;
       } catch (error) {
         console.error('Error fetching article:', error);
