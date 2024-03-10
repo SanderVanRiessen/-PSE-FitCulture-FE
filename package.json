@@ -16,6 +16,7 @@
     "primevue": "^3.48.1",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5",
+    "vue3-markdown-it": "^1.0.10",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

@@ -25,7 +25,7 @@
 import { onMounted, ref, computed, watch} from 'vue';
 import axios from 'axios';
 import Paginator from 'primevue/paginator';
-import { formatDate } from '@/dateUtils';
+import { formatDate } from '@/utils/dateUtils';
 
 export default {
   name: 'ArticlesPage',

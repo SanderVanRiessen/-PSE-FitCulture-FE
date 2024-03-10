@@ -3,7 +3,7 @@ import LandingPage from "@/views/LandingPage.vue";
 import LoginPage from "@/views/LoginPage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import ArticlesPage from "@/views/ArticlesPage.vue";
-import ArticleDetail from "@/views/ArticleDetail.vue";
+import ArticleDetail from "@/views/ArticleDetailPage.vue";
 
 const routes = [
   { path: "/", name: "default", component: LandingPage },
