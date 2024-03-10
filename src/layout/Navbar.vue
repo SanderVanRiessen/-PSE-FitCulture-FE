@@ -33,8 +33,9 @@
           <a
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
             v-ripple
+            @click="goArticles"
           >
-            <span>Features</span>
+            <span>Articles</span>
           </a>
         </li>
         <li>
@@ -85,6 +86,9 @@ export default {
     goToRegister() {
       this.$router.push("/register");
     },
+    goArticles() {
+      this.$router.push("/articles")
+    }
   },
 };
 </script>

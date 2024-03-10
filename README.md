@@ -21,6 +21,7 @@ tbd
 - **PrimeVue**: Component library to speed up the development time to use prebuild components
 - **Vuex**: State management to keep track of data through the app
 - **Axios**: Easily fetch api calls to the backend api
+- **Markdown-it** Markdown parser to stylize text 
 
 ## Setup and Installation
 
