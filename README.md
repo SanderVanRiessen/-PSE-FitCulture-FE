@@ -1,24 +1,40 @@
-# pse-fitculture-fe
+# README for front-end application: FitCulture
 
-## Project setup
+## Overview
+
+tbd
+
+## Features
+
+tbd
+
+## Prerequisite
+
+- Back-end api
+- install node
+- install pnpm
+
+## Technology Stack
+
+- **Vue 3**: Front-end framework to setup an application
+- **Vue router**: Define routes for the different pages in your application
+- **PrimeVue**: Component library to speed up the development time to use prebuild components
+- **Vuex**: State management to keep track of data through the app
+- **Axios**: Easily fetch api calls to the backend api
+- **Markdown-it** Markdown parser to stylize text 
+
+## Setup and Installation
+
+1. **Clone the Repository**: Clone the FitCulture repository to your local machine using `git clone`.
+
+2. **Install dependencies**:
+
 ```
-npm install
+pnpm install
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+3. **Build and Run**:
 
-### Compiles and minifies for production
 ```
-npm run build
+pnpm run serve
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
