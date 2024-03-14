@@ -33,7 +33,7 @@ const store = createStore({
       state.token = token;
     },
     clearToken(state) {
-      state.token = null; // Clear the token, effectively logging out the user
+      state.token = null;
     },
   },
   actions: {},
