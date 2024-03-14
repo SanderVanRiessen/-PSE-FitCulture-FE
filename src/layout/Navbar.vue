@@ -1,8 +1,8 @@
 <template>
   <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3">
     <Toast />
-    <img :src="require('@/assets/FitcultureLogo.webp')" alt="Logo" height="50" class="mr-0 lg:mr-2" />
-    <span class="text-900 font-medium text-2xl line-height-3 mr-8" style="text-wrap: nowrap">Fit culture</span>
+    <img :src="require('@/assets/FitcultureLogo.webp')" alt="Logo" height="50" class="mr-0 lg:mr-2 cursor-pointer" @click="goHome"/>
+    <span class="text-900 font-medium text-2xl line-height-3 mr-8 cursor-pointer" style="text-wrap: nowrap" @click="goHome">Fit culture</span>
     <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top: 120px">
       <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer">
         <li>
@@ -61,7 +61,7 @@ export default {
     },
     logout() {
       this.clearToken();
-      this.$router.push("/login");
+      this.$router.push("/");
       this.toast.add({
         severity: "success",
         summary: "Success",
