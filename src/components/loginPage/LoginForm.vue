@@ -67,6 +67,7 @@ export default {
         {
           onSuccess: (data) => {
             this.setToken(data.jwt);
+            localStorage.setItem("token", data.jwt);
             this.toast.add({
               severity: "success",
               summary: "Success",

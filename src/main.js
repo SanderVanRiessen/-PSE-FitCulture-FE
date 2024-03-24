@@ -17,6 +17,11 @@ import Password from "primevue/password";
 import Divider from "primevue/divider";
 import Toast from "primevue/toast";
 import ToastService from "primevue/toastservice";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import ColumnGroup from "primevue/columngroup";
+import Row from "primevue/row";
+import Dropdown from "primevue/dropdown";
 
 import { VueQueryPlugin } from "@tanstack/vue-query";
 import { createStore } from "vuex";
@@ -57,6 +62,11 @@ app.component("Checkbox", Checkbox);
 app.component("Password", Password);
 app.component("Divider", Divider);
 app.component("Toast", Toast);
+app.component("DataTable", DataTable);
+app.component("Column", Column);
+app.component("ColumnGroup", ColumnGroup);
+app.component("Row", Row);
+app.component("Dropdown", Dropdown);
 
 app.use(router);
 

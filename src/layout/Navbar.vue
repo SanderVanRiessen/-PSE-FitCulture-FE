@@ -42,8 +42,9 @@
           <a
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
             v-ripple
+            @click="goToDashboard"
           >
-            <span>Highlights</span>
+            <span>Dashboard</span>
           </a>
         </li>
         <li>
@@ -87,8 +88,11 @@ export default {
       this.$router.push("/register");
     },
     goArticles() {
-      this.$router.push("/articles")
-    }
+      this.$router.push("/articles");
+    },
+    goToDashboard() {
+      this.$router.push("/dashboard");
+    },
   },
 };
 </script>

@@ -4,6 +4,7 @@ import LoginPage from "@/views/LoginPage.vue";
 import RegisterPage from "@/views/RegisterPage.vue";
 import ArticlesPage from "@/views/ArticlesPage.vue";
 import ArticleDetail from "@/views/ArticleDetailPage.vue";
+import UserDashboardPage from "@/views/UserDashboardPage.vue";
 
 const routes = [
   { path: "/", name: "default", component: LandingPage },
@@ -12,6 +13,7 @@ const routes = [
   { path: "/register", name: "register", component: RegisterPage },
   { path: "/articles", name: "articles", component: ArticlesPage },
   { path: "/article/:id", name: "articleDetail", component: ArticleDetail },
+  { path: "/dashboard", name: "dashboard", component: UserDashboardPage },
 ];
 
 export const router = createRouter({
