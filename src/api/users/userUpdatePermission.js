@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async ({ token, id, role }) => {
   try {
     const response = await axios.post(
-      "/user/setauthor",
+      '/user/setauthor',
       {
         id,
         role,
@@ -11,12 +11,12 @@ export default async ({ token, id, role }) => {
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Allow-Methods": ["Get"],
-          "Access-Control-Request-Methods": ["Get"],
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': ['Get'],
+          'Access-Control-Request-Methods': ['Get'],
         },
-      }
+      },
     );
     return response.data;
   } catch (error) {

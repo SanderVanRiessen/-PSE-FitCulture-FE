@@ -2,7 +2,7 @@
   <div class="article-container">
     <h1>{{ article.title }}</h1>
     <div class="article-content">
-      <Markdown :source="article.body"/>
+      <Markdown :source="article.body" />
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ import Markdown from 'vue3-markdown-it';
 
 export default {
   components: {
-    Markdown
+    Markdown,
   },
   name: 'ArticleDetail',
   setup() {
@@ -35,7 +35,7 @@ export default {
     onMounted(fetchArticle);
 
     return { article };
-  }
+  },
 };
 </script>
 

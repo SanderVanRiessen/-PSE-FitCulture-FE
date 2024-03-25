@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import UserTable from "@/components/UserDashboardPage/UserTable.vue";
+import UserTable from '@/components/UserDashboardPage/UserTable.vue';
 export default {
-  name: "UserDashboardPage",
+  name: 'UserDashboardPage',
   components: {
     UserTable,
   },

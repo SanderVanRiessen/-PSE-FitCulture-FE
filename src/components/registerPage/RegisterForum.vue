@@ -11,14 +11,13 @@
       label="Register"
       icon="pi pi-user"
       class="w-full mt-5"
-      :loading="isLoading"
-    />
+      :loading="isLoading" />
   </div>
 </template>
 
 <script setup>
-import { useMutation } from "@tanstack/vue-query";
-import registerFetch from "@/api/authentication/registerFetch";
+import { useMutation } from '@tanstack/vue-query';
+import registerFetch from '@/api/authentication/registerFetch';
 
 const { mutate, isLoading } = useMutation({
   mutationFn: (user) => registerFetch(user),
@@ -26,15 +25,15 @@ const { mutate, isLoading } = useMutation({
 </script>
 
 <script>
-import { useToast } from "primevue/usetoast";
-import { router } from "@/router";
+import { useToast } from 'primevue/usetoast';
+import { router } from '@/router';
 
-import EmailInput from "./EmailInput.vue";
-import PasswordInput from "./PasswordInput.vue";
-import NameInput from "./NameInput.vue";
+import EmailInput from './EmailInput.vue';
+import PasswordInput from './PasswordInput.vue';
+import NameInput from './NameInput.vue';
 
 export default {
-  name: "RegisterForum",
+  name: 'RegisterForum',
   components: {
     EmailInput,
     PasswordInput,
@@ -42,9 +41,9 @@ export default {
   },
   data() {
     return {
-      email: { value: "", error: false },
-      password: { value: "", error: false },
-      name: { value: "", error: false },
+      email: { value: '', error: false },
+      password: { value: '', error: false },
+      name: { value: '', error: false },
       toast: useToast(),
     };
   },
@@ -66,27 +65,27 @@ export default {
           name: this.name.value,
           email: this.email.value,
           password: this.password.value,
-          role: "user",
+          role: 'user',
         },
         {
           onSuccess: () => {
             this.toast.add({
-              severity: "success",
-              summary: "Success",
-              detail: "User registered successfully",
+              severity: 'success',
+              summary: 'Success',
+              detail: 'User registered successfully',
               life: 3000,
             });
-            router.push("/");
+            router.push('/');
           },
           onError: (error) => {
             this.toast.add({
-              severity: "error",
-              summary: "Error",
+              severity: 'error',
+              summary: 'Error',
               detail: error,
               life: 3000,
             });
           },
-        }
+        },
       );
     },
   },

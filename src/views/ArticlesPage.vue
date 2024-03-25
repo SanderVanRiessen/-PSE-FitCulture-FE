@@ -4,8 +4,14 @@
     <div v-if="isLoading">Loading...</div>
     <div v-else-if="isError">An error occurred: {{ error.message }}</div>
     <div v-else class="articles-container">
-      <div v-for="article in paginatedArticles" :key="article.id" class="article-wrapper">
-        <router-link :to="`/article/${article.id}`" @click="storePageNumber" class="article-link">
+      <div
+        v-for="article in paginatedArticles"
+        :key="article.id"
+        class="article-wrapper">
+        <router-link
+          :to="`/article/${article.id}`"
+          @click="storePageNumber"
+          class="article-link">
           <div class="article-block">
             <h2>{{ article.title }}</h2>
             <div class="article-info">
@@ -16,14 +22,14 @@
         </router-link>
       </div>
       <!-- Updated visibility condition -->
-      <Paginator v-if="articlesCount > 0"
-                 :totalRecords="articlesCount"
-                 :rows="rowsPerPage"
-                 @page="onPageChange" />
+      <Paginator
+        v-if="articlesCount > 0"
+        :totalRecords="articlesCount"
+        :rows="rowsPerPage"
+        @page="onPageChange" />
     </div>
   </div>
 </template>
-
 
 <script>
 import { ref, computed, onMounted } from 'vue';
@@ -45,7 +51,12 @@ export default {
       return response.data;
     };
 
-    const { data: articles, isLoading, isError, error } = useQuery({
+    const {
+      data: articles,
+      isLoading,
+      isError,
+      error,
+    } = useQuery({
       queryKey: ['articles'],
       queryFn: fetchArticles,
     });

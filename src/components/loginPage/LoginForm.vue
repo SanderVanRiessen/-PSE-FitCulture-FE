@@ -16,17 +16,16 @@
       label="Sign In"
       icon="pi pi-user"
       class="w-full"
-      :loading="isLoading"
-    ></Button>
+      :loading="isLoading"></Button>
   </div>
 </template>
 
 <script setup>
-import { useMutation } from "@tanstack/vue-query";
-import loginFetch from "@/api/authentication/loginFetch";
-import RememberMeCheck from "./RememberMeCheck.vue";
-import EmailInput from "./EmailInput.vue";
-import PasswordInput from "./PasswordInput.vue";
+import { useMutation } from '@tanstack/vue-query';
+import loginFetch from '@/api/authentication/loginFetch';
+import RememberMeCheck from './RememberMeCheck.vue';
+import EmailInput from './EmailInput.vue';
+import PasswordInput from './PasswordInput.vue';
 
 const { mutate, isLoading } = useMutation({
   mutationFn: (userLogin) => loginFetch(userLogin),
@@ -34,16 +33,16 @@ const { mutate, isLoading } = useMutation({
 </script>
 
 <script>
-import { useToast } from "primevue/usetoast";
-import { mapMutations } from "vuex";
-import { router } from "@/router";
+import { useToast } from 'primevue/usetoast';
+import { mapMutations } from 'vuex';
+import { router } from '@/router';
 
 export default {
-  name: "LoginForm",
+  name: 'LoginForm',
   data() {
     return {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
       checked: false,
       toast: useToast(),
     };
@@ -54,9 +53,9 @@ export default {
     RememberMeCheck,
   },
   methods: {
-    ...mapMutations(["setToken"]),
+    ...mapMutations(['setToken']),
     goToRegister() {
-      router.push("/register");
+      router.push('/register');
     },
     login(mutate) {
       mutate(
@@ -67,24 +66,24 @@ export default {
         {
           onSuccess: (data) => {
             this.setToken(data.jwt);
-            localStorage.setItem("token", data.jwt);
+            localStorage.setItem('token', data.jwt);
             this.toast.add({
-              severity: "success",
-              summary: "Success",
-              detail: "Logged in successfully",
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Logged in successfully',
               life: 3000,
             });
-            router.push("/");
+            router.push('/');
           },
           onError: (error) => {
             this.toast.add({
-              severity: "error",
-              summary: "Error",
+              severity: 'error',
+              summary: 'Error',
               detail: error,
               life: 3000,
             });
           },
-        }
+        },
       );
     },
   },

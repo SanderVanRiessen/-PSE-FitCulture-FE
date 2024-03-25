@@ -13,8 +13,7 @@
       v-on:blur="validatePassword(value)"
       inputClass="w-full"
       data-testid="password-input"
-      strongRegex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[a-zA-Z\d!@#$%^&*()\-_+=]{8,}"
-    >
+      strongRegex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[a-zA-Z\d!@#$%^&*()\-_+=]{8,}">
       <template #header>
         <h6 class="my-1">Pick a password</h6>
       </template>
@@ -38,16 +37,16 @@
 
 <script>
 export default {
-  name: "PasswordInput",
-  props: ["modelValue"],
-  emits: ["update:modelValue"],
+  name: 'PasswordInput',
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
   computed: {
     value: {
       get() {
         return this.modelValue.value;
       },
       set(value) {
-        this.$emit("update:modelValue", { value, error: this.error });
+        this.$emit('update:modelValue', { value, error: this.error });
       },
     },
   },

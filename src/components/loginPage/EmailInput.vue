@@ -7,23 +7,22 @@
       v-model="value"
       required
       class="w-full mb-3"
-      data-testid="email-input"
-    />
+      data-testid="email-input" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "EmailInput",
-  props: ["modelValue"],
-  emits: ["update:modelValue"],
+  name: 'EmailInput',
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value);
+        this.$emit('update:modelValue', value);
       },
     },
   },

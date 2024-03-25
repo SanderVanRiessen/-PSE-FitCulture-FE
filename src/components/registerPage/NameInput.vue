@@ -7,23 +7,22 @@
       type="text"
       required
       v-bind:invalid="error > 0"
-      data-testid="name-input"
-    />
+      data-testid="name-input" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "NameInput",
-  props: ["modelValue"],
-  emits: ["update:modelValue"],
+  name: 'NameInput',
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
   computed: {
     value: {
       get() {
         return this.modelValue.value;
       },
       set(value) {
-        this.$emit("update:modelValue", { value, error: this.error });
+        this.$emit('update:modelValue', { value, error: this.error });
       },
     },
   },
