@@ -11,8 +11,7 @@
       <div class="col-12 md:col-4 mb-4 px-5">
         <span
           class="p-3 shadow-2 mb-3 inline-block surface-card"
-          style="border-radius: 10px"
-        >
+          style="border-radius: 10px">
           <i class="pi pi-desktop text-4xl text-blue-500"></i>
         </span>
         <div class="text-900 text-xl mb-3 font-medium">
@@ -26,8 +25,7 @@
       <div class="col-12 md:col-4 mb-4 px-5">
         <span
           class="p-3 shadow-2 mb-3 inline-block surface-card"
-          style="border-radius: 10px"
-        >
+          style="border-radius: 10px">
           <i class="pi pi-lock text-4xl text-blue-500"></i>
         </span>
         <div class="text-900 text-xl mb-3 font-medium">
@@ -41,8 +39,7 @@
       <div class="col-12 md:col-4 mb-4 px-5">
         <span
           class="p-3 shadow-2 mb-3 inline-block surface-card"
-          style="border-radius: 10px"
-        >
+          style="border-radius: 10px">
           <i class="pi pi-check-circle text-4xl text-blue-500"></i>
         </span>
         <div class="text-900 text-xl mb-3 font-medium">Easy to Use</div>
@@ -54,8 +51,7 @@
       <div class="col-12 md:col-4 mb-4 px-5">
         <span
           class="p-3 shadow-2 mb-3 inline-block surface-card"
-          style="border-radius: 10px"
-        >
+          style="border-radius: 10px">
           <i class="pi pi-globe text-4xl text-blue-500"></i>
         </span>
         <div class="text-900 text-xl mb-3 font-medium">
@@ -69,8 +65,7 @@
       <div class="col-12 md:col-4 mb-4 px-5">
         <span
           class="p-3 shadow-2 mb-3 inline-block surface-card"
-          style="border-radius: 10px"
-        >
+          style="border-radius: 10px">
           <i class="pi pi-github text-4xl text-blue-500"></i>
         </span>
         <div class="text-900 text-xl mb-3 font-medium">Open Source</div>
@@ -82,8 +77,7 @@
       <div class="col-12 md:col-4 md:mb-4 mb-0 px-3">
         <span
           class="p-3 shadow-2 mb-3 inline-block surface-card"
-          style="border-radius: 10px"
-        >
+          style="border-radius: 10px">
           <i class="pi pi-shield text-4xl text-blue-500"></i>
         </span>
         <div class="text-900 text-xl mb-3 font-medium">Trusted Security</div>
@@ -98,6 +92,6 @@
 
 <script>
 export default {
-  name: "landingPage",
+  name: 'LandingPage',
 };
 </script>

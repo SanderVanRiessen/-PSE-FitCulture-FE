@@ -2,7 +2,7 @@
   <div class="article-container">
     <h1>{{ article.title }}</h1>
     <div class="article-content">
-      <Markdown :source="article.body"/>
+      <Markdown :source="article.body" />
     </div>
   </div>
 </template>
@@ -14,10 +14,10 @@ import { useRoute } from 'vue-router';
 import Markdown from 'vue3-markdown-it';
 
 export default {
-  components: {
-    Markdown
-  },
   name: 'ArticleDetail',
+  components: {
+    Markdown,
+  },
   setup() {
     const article = ref({});
     const route = useRoute();
@@ -35,7 +35,7 @@ export default {
     onMounted(fetchArticle);
 
     return { article };
-  }
+  },
 };
 </script>
 

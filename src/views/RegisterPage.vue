@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import RegisterForum from "@/components/registerPage/RegisterForum.vue";
+import RegisterForum from '@/components/registerPage/RegisterForum.vue';
 
 export default {
-  name: "RegisterPage",
+  name: 'RegisterPage',
   components: {
     RegisterForum,
   },

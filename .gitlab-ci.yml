@@ -41,6 +41,15 @@ quality:
   script:
     - pnpm run lint
 
+prettier:
+  stage: lint & test
+  needs: [build]
+  extends: .install_pnpm
+  tags:
+    - hva
+  script:
+    - pnpm run prettier:check
+
 test:
   stage: lint & test
   needs: [build]
