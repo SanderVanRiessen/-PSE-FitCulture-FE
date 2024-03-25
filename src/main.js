@@ -32,6 +32,9 @@ const store = createStore({
     setToken(state, token) {
       state.token = token;
     },
+    clearToken(state) {
+      state.token = null;
+    },
   },
   actions: {},
   getters: {
