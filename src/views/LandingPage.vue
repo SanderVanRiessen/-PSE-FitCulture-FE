@@ -92,6 +92,6 @@
 
 <script>
 export default {
-  name: 'landingPage',
+  name: 'LandingPage',
 };
 </script>

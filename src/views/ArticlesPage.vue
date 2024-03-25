@@ -10,8 +10,8 @@
         class="article-wrapper">
         <router-link
           :to="`/article/${article.id}`"
-          @click="storePageNumber"
-          class="article-link">
+          class="article-link"
+          @click="storePageNumber">
           <div class="article-block">
             <h2>{{ article.title }}</h2>
             <div class="article-info">
@@ -24,7 +24,7 @@
       <!-- Updated visibility condition -->
       <Paginator
         v-if="articlesCount > 0"
-        :totalRecords="articlesCount"
+        :total-records="articlesCount"
         :rows="rowsPerPage"
         @page="onPageChange" />
     </div>
@@ -40,7 +40,6 @@ import { formatDate } from '@/utils/dateUtils';
 
 export default {
   name: 'ArticlesPage',
-  methods: { formatDate },
   components: { Paginator },
   setup() {
     const currentPage = ref(1);
@@ -94,6 +93,7 @@ export default {
       articlesCount,
     };
   },
+  methods: { formatDate },
 };
 </script>
 

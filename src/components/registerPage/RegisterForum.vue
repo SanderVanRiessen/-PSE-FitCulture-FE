@@ -7,11 +7,11 @@
 
     <NameInput v-model="name" />
     <Button
-      @click="registerUser(mutate)"
       label="Register"
       icon="pi pi-user"
       class="w-full mt-5"
-      :loading="isLoading" />
+      :loading="isLoading"
+      @click="registerUser(mutate)" />
   </div>
 </template>
 

@@ -6,14 +6,14 @@
     <Password
       id="passowrd"
       v-model="value"
-      toggleMask
+      toggle-mask
       required
       type="password"
-      v-bind:invalid="error > 0"
-      v-on:blur="validatePassword(value)"
-      inputClass="w-full"
+      :invalid="error > 0"
+      input-class="w-full"
       data-testid="password-input"
-      strongRegex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[a-zA-Z\d!@#$%^&*()\-_+=]{8,}">
+      strong-regex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_+=])[a-zA-Z\d!@#$%^&*()\-_+=]{8,}"
+      @blur="validatePassword(value)">
       <template #header>
         <h6 class="my-1">Pick a password</h6>
       </template>
@@ -29,7 +29,7 @@
         </ul>
       </template>
     </Password>
-    <small id="password-help" class="mt-1 text-red-600" v-show="error"
+    <small v-show="error" id="password-help" class="mt-1 text-red-600"
       >Password is not valid</small
     >
   </div>
@@ -40,6 +40,12 @@ export default {
   name: 'PasswordInput',
   props: ['modelValue'],
   emits: ['update:modelValue'],
+  data() {
+    return {
+      password: this.modelValue.value,
+      error: this.modelValue.error,
+    };
+  },
   computed: {
     value: {
       get() {
@@ -49,12 +55,6 @@ export default {
         this.$emit('update:modelValue', { value, error: this.error });
       },
     },
-  },
-  data() {
-    return {
-      password: this.modelValue.value,
-      error: this.modelValue.error,
-    };
   },
   methods: {
     validatePassword(value) {

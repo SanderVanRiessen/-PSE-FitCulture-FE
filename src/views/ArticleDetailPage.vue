@@ -14,10 +14,10 @@ import { useRoute } from 'vue-router';
 import Markdown from 'vue3-markdown-it';
 
 export default {
+  name: 'ArticleDetail',
   components: {
     Markdown,
   },
-  name: 'ArticleDetail',
   setup() {
     const article = ref({});
     const route = useRoute();

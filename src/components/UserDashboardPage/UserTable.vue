@@ -1,5 +1,5 @@
 <template>
-  <DataTable :value="data" class="w-9" tableStyle="min-width: 50rem">
+  <DataTable :value="data" class="w-9" table-style="min-width: 50rem">
     <Column
       v-for="col of columns"
       :key="col.field"
@@ -8,12 +8,12 @@
     <Column header="Role">
       <template #body="slotProps">
         <Dropdown
-          v-bind:modelValue="
+          v-model="selectedRole"
+          :model-value="
             roles.find((role) => role.id === slotProps.data.role.id)
           "
-          v-model="selectedRole"
           :options="roles"
-          optionLabel="name"
+          option-label="name"
           placeholder="select role"
           class="w-full md:w-14rem"
           @change="updateRole(slotProps.data.id)" />

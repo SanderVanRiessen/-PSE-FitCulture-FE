@@ -12,11 +12,11 @@
     </div>
 
     <Button
-      @click="login(mutate)"
       label="Sign In"
       icon="pi pi-user"
       class="w-full"
-      :loading="isLoading"></Button>
+      :loading="isLoading"
+      @click="login(mutate)"></Button>
   </div>
 </template>
 
@@ -39,6 +39,11 @@ import { router } from '@/router';
 
 export default {
   name: 'LoginForm',
+  components: {
+    EmailInput,
+    PasswordInput,
+    RememberMeCheck,
+  },
   data() {
     return {
       email: '',
@@ -46,11 +51,6 @@ export default {
       checked: false,
       toast: useToast(),
     };
-  },
-  components: {
-    EmailInput,
-    PasswordInput,
-    RememberMeCheck,
   },
   methods: {
     ...mapMutations(['setToken']),

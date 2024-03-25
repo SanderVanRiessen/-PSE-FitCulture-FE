@@ -2,8 +2,8 @@
   <div class="flex align-items-center">
     <Checkbox
       id="rememberme1"
-      :binary="true"
       v-model="checkedValue"
+      :binary="true"
       class="mr-2"
       data-testid="remember-me-check" />
     <label for="rememberme1">Remember me</label>
