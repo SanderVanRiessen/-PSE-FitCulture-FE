@@ -39,15 +39,16 @@
           <a
             v-ripple
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
-            @click="goToDashboard">
-            <span>Dashboard</span>
+            @click="goToUserDashboard">
+            <span>Users</span>
           </a>
         </li>
         <li>
           <a
             v-ripple
-            class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple">
-            <span>Pricing</span>
+            class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
+            @click="goToExercisePlanDashboard">
+            <span>Exercise plans</span>
           </a>
         </li>
       </ul>
@@ -113,8 +114,11 @@ export default {
     goArticles() {
       this.$router.push('/articles');
     },
-    goToDashboard() {
-      this.$router.push('/dashboard');
+    goToUserDashboard() {
+      this.$router.push('/dashboard/user');
+    },
+    goToExercisePlanDashboard() {
+      this.$router.push('/dashboard/exerciseplan');
     },
   },
 };

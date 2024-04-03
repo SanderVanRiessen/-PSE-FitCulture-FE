@@ -1,10 +1,12 @@
 <template>
-  <DataTable :value="data" class="w-9" table-style="min-width: 50rem">
-    <Column
-      v-for="col of columns"
-      :key="col.field"
-      :field="col.field"
-      :header="col.header"></Column>
+  <DataTable
+    v-if="!isLoading"
+    :value="userData"
+    class="w-9"
+    table-style="min-width: 50rem">
+    <Column field="id" header="ID"></Column>
+    <Column field="name" header="Name"></Column>
+    <Column field="email" header="Email"></Column>
     <Column header="Role">
       <template #body="slotProps">
         <Dropdown
@@ -31,7 +33,11 @@ export default {
   setup() {
     const token = localStorage.getItem('token');
 
-    const { data, refetch } = useQuery({
+    const {
+      data: userData,
+      isLoading,
+      refetch,
+    } = useQuery({
       queryFn: () => usersFetch(token),
     });
     const { mutate } = useMutation({
@@ -51,7 +57,7 @@ export default {
       { field: 'email', header: 'Email' },
     ];
 
-    return { data, columns, mutate };
+    return { userData, isLoading, columns, mutate };
   },
   data() {
     return {
