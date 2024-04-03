@@ -1,6 +1,6 @@
 <template>
   <DataTable
-    v-if="!isLoading"
+    v-if="userData"
     :value="userData"
     class="w-9"
     table-style="min-width: 50rem">
@@ -38,6 +38,7 @@ export default {
       isLoading,
       refetch,
     } = useQuery({
+      queryKey: ['users'],
       queryFn: () => usersFetch(token),
     });
     const { mutate } = useMutation({

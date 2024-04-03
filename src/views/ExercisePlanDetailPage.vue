@@ -29,6 +29,7 @@ export default {
     const id = route.params.id;
 
     const { data, isLoading, refetch } = useQuery({
+      queryKey: ['exerciseplan'],
       queryFn: () => exerciseplanFetch(token, id),
     });
     return { data, isLoading, refetch };

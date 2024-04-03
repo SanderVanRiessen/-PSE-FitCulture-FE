@@ -29,6 +29,7 @@ export default {
     const token = localStorage.getItem('token');
 
     const { data, isLoading } = useQuery({
+      queryKey: ['exerciseplans'],
       queryFn: () => exerciseplansFetch(token),
     });
     const columns = [
