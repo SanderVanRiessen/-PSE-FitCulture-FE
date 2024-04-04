@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-export default async (jwt, exercise) => {
+export default async (jwt, exerciseplan) => {
   try {
     const response = await axios.post(
-      `/exercise`,
-      { ...exercise },
+      `/exerciseplan`,
+      { ...exerciseplan },
       {
         headers: {
           Authorization: `Bearer ${jwt}`,

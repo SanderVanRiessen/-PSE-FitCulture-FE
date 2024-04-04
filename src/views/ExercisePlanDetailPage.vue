@@ -5,7 +5,10 @@
       <MainContent v-if="!isLoading" :exerciseplan="data" :refetch="refetch" />
     </div>
     <div class="flex justify-content-center">
-      <ExercisesDataView v-if="!isLoading" :exercises="data" />
+      <ExercisesDataView
+        v-if="!isLoading"
+        :exercises="data"
+        :refetch="refetch" />
     </div>
   </div>
 </template>
