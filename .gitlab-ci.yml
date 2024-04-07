@@ -8,16 +8,17 @@ cache:
     - node_modules/
     - .pnpm-store/
 
+stages:
+  - build
+  - lint & test
+  - docker-build
+  - deploy
+
 .install_pnpm:
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest --activate
     - pnpm config set store-dir .pnpm-store
-
-stages:
-  - build
-  - lint & test
-  - docker-build
 
 build:
   stage: build
@@ -30,11 +31,12 @@ build:
   artifacts:
     expire_in: 3 days
     paths:
+      - build/
       - node_modules/
 
 quality:
   stage: lint & test
-  needs: [build]
+  needs: [ build ]
   extends: .install_pnpm
   tags:
     - hva
@@ -52,7 +54,7 @@ prettier:
 
 test:
   stage: lint & test
-  needs: [build]
+  needs: [ build ]
   extends: .install_pnpm
   tags:
     - hva
@@ -62,12 +64,30 @@ test:
 docker-build:
   image: docker:25.0.3
   stage: docker-build
+  needs: [ build ]
   tags:
     - hva
   only:
-    refs:
-      - main
+    - main
   script:
     - docker login gitlab.fdmci.hva.nl:5050 -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
     - docker build -t gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe .
     - docker push gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe
+
+deploy-job:
+  stage: deploy
+  needs: [ build ]
+  image: ruby:2.7
+  tags:
+    - hva
+  script:
+    - apt-get update -qq && apt-get install -y curl git
+    - curl https://cli-assets.heroku.com/install.sh | sh
+    - export HEROKU_API_KEY="$HEROKU_PRODUCTION_KEY"
+    - git config --global user.email "you@example.com"
+    - git config --global user.name "GitLab CI/CD"
+    - if ! git remote | grep -q heroku; then git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git; fi
+    - git fetch --unshallow || true
+    - git push heroku HEAD:refs/heads/main --force
+  only:
+    - main
