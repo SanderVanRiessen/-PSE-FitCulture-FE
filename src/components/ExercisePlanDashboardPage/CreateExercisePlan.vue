@@ -78,6 +78,14 @@ export default {
           onSuccess: (data) => {
             router.push(`/dashboard/exerciseplan/${data.id}`);
           },
+          onError: (error) => {
+            this.toast.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: error.message,
+              life: 3000,
+            });
+          },
         },
       );
     },
