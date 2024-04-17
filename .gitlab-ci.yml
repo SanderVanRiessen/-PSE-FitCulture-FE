@@ -5,6 +5,7 @@ cache:
     files:
       - pnpm-lock.yaml
   paths:
+    - build/
     - node_modules/
     - .pnpm-store/
 
@@ -28,15 +29,10 @@ build:
   script:
     - pnpm install
     - pnpm run build
-  artifacts:
-    expire_in: 3 days
-    paths:
-      - build/
-      - node_modules/
 
 quality:
   stage: lint & test
-  needs: [ build ]
+  needs: [build]
   extends: .install_pnpm
   tags:
     - hva
@@ -54,7 +50,7 @@ prettier:
 
 test:
   stage: lint & test
-  needs: [ build ]
+  needs: [build]
   extends: .install_pnpm
   tags:
     - hva
@@ -64,7 +60,7 @@ test:
 docker-build:
   image: docker:25.0.3
   stage: docker-build
-  needs: [ build ]
+  needs: [build]
   tags:
     - hva
   only:
@@ -76,7 +72,7 @@ docker-build:
 
 deploy-job:
   stage: deploy
-  needs: [ build ]
+  needs: [build]
   image: ruby:2.7
   tags:
     - hva
