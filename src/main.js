@@ -22,6 +22,12 @@ import Column from 'primevue/column';
 import ColumnGroup from 'primevue/columngroup';
 import Row from 'primevue/row';
 import Dropdown from 'primevue/dropdown';
+import ProgressSpinner from 'primevue/progressspinner';
+import Chip from 'primevue/chip';
+import DataView from 'primevue/dataview';
+import DataViewLayoutOptions from 'primevue/dataviewlayoutoptions';
+import Dialog from 'primevue/dialog';
+import Tag from 'primevue/tag';
 
 import { VueQueryPlugin } from '@tanstack/vue-query';
 import { createStore } from 'vuex';
@@ -31,7 +37,7 @@ import '@/assets/styles.scss';
 
 const store = createStore({
   state: {
-    token: null,
+    token: localStorage.getItem('token') || null,
   },
   mutations: {
     setToken(state, token) {
@@ -39,6 +45,7 @@ const store = createStore({
     },
     clearToken(state) {
       state.token = null;
+      localStorage.removeItem('token');
     },
   },
   actions: {},
@@ -70,6 +77,12 @@ app.component('Column', Column);
 app.component('ColumnGroup', ColumnGroup);
 app.component('Row', Row);
 app.component('Dropdown', Dropdown);
+app.component('ProgressSpinner', ProgressSpinner);
+app.component('Chip', Chip);
+app.component('DataView', DataView);
+app.component('Dialog', Dialog);
+app.component('Tag', Tag);
+app.component('DataViewLayoutOptions', DataViewLayoutOptions);
 
 app.use(router);
 
