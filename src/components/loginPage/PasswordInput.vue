@@ -5,28 +5,27 @@
     >
     <InputText
       id="password1"
-      type="password"
       v-model="value"
+      type="password"
       required
-      toggleMask
+      toggle-mask
       class="w-full mb-3"
-      data-testid="password-input"
-    />
+      data-testid="password-input" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "PasswordInput",
-  props: ["modelValue"],
-  emits: ["update:modelValue"],
+  name: 'PasswordInput',
+  props: ['modelValue'],
+  emits: ['update:modelValue'],
   computed: {
     value: {
       get() {
         return this.modelValue;
       },
       set(value) {
-        this.$emit("update:modelValue", value);
+        this.$emit('update:modelValue', value);
       },
     },
   },

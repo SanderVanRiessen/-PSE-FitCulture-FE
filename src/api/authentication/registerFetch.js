@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async (user) => {
   try {
-    const response = await axios.post("/public/register", {
+    const response = await axios.post('/public/register', {
       ...user,
     });
     return response.data;

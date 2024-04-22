@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export default async ({ username, password }) => {
   try {
-    const response = await axios.post("/login", {
+    const response = await axios.post('/login', {
       username,
       password,
     });
