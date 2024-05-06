@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "serve -s dist",
-    "heroku-postbuild": "pnpm run build",
+    "heroku-postbuild": "npm run build",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
