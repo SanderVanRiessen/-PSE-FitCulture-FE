@@ -11,7 +11,7 @@
         label="Post"
         type="submit"
         :disabled="postContent.trim() === ''"
-        class="p-button-success" />
+        class="p-button-rounded border-none ml-5 font-light text-white line-height-2" />
     </form>
   </div>
 </template>
