@@ -48,7 +48,16 @@ const store = createStore({
       localStorage.removeItem('token');
     },
   },
-  actions: {},
+  actions: {
+    setToken({ commit }, token) {
+      commit('setToken', token);
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    },
+    clearToken({ commit }) {
+      commit('clearToken');
+      axios.defaults.headers.common['Authorization'] = null;
+    },
+  },
   getters: {
     isLoggedIn(state) {
       return !!state.token;

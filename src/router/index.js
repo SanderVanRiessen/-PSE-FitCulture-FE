@@ -11,6 +11,9 @@ import JoinExercisePlanPage from '@/views/JoinExercisePlanPage.vue';
 import JoinExercisePlanDetailPage from '@/views/JoinExercisePlanDetailPage.vue';
 import MyExercisePlanPage from '@/views/MyExercisePlanPage.vue';
 import MyExercisePlanDetailPage from '@/views/MyExercisePlanDetailPage.vue';
+import ForumLanding from '@/views/Forum/ForumLanding.vue';
+import CategoryLanding from '@/views/Forum/CategoryLanding.vue';
+import TopicLanding from '@/views/Forum/TopicLanding.vue';
 
 const routes = [
   { path: '/', name: 'default', component: LandingPage },
@@ -19,6 +22,22 @@ const routes = [
   { path: '/register', name: 'register', component: RegisterPage },
   { path: '/articles', name: 'articles', component: ArticlesPage },
   { path: '/article/:id', name: 'articleDetail', component: ArticleDetail },
+  { path: '/forum/landing', name: 'forum', component: ForumLanding },
+  {
+    path: '/forum/topics/:topicId',
+    name: 'topics',
+    component: TopicLanding,
+    props: true,
+  },
+  {
+    path: '/forum/:categoryId/topics',
+    name: 'category',
+    component: CategoryLanding,
+    props: (route) => ({
+      categoryId: route.params.categoryId,
+      categoryName: route.query.categoryName,
+    }),
+  },
   {
     path: '/joinexerciseplan',
     name: 'joinexerciseplan',
