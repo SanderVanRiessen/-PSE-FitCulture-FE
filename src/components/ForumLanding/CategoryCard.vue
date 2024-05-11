@@ -13,7 +13,7 @@
       <div v-if="category.recentTopics && category.recentTopics.length > 0">
         <ul class="list-none pl-0">
           <li v-for="topic in category.recentTopics" :key="topic.id">
-            <TopicItem :topic="topic" @goToTopic="$emit('goToTopic', $event)" />
+            <TopicItem :topic="topic" />
           </li>
         </ul>
       </div>

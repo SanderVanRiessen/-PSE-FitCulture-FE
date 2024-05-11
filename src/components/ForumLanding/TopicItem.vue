@@ -10,7 +10,7 @@
     <div>
       <a
         class="cursor-pointer text-primary hover:underline"
-        @click="handleClick"
+        @click.stop="handleClick"
         >{{ topic.name }}</a
       >
     </div>
@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit('goToTopic', this.topic.id);
+      this.$router.push(`/forum/topics/${this.topic.id}`);
     },
   },
 };

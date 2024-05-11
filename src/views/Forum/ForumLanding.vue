@@ -4,7 +4,7 @@
       v-for="category in categories"
       :key="category.id"
       class="p-col flex align-items-stretch">
-      <CategoryCard :category="category" @goToTopic="goToTopic" />
+      <CategoryCard :category="category" />
     </div>
   </div>
 </template>
@@ -36,9 +36,6 @@ export default {
         .catch((error) => {
           console.error('Failed to fetch categories:', error);
         });
-    },
-    goToTopic(topicId) {
-      console.log('Navigating to topic with ID:', topicId);
     },
   },
 };
