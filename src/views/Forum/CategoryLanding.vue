@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Topics in "{{ categoryName }}"</h1>
-    <TopicList :topics="topics" />
+    <TopicList :topics="topics" @topic-deleted="handleTopicDeleted" />
     <CreateTopicComponent
       v-if="isLoggedIn"
       :category-id="categoryId"
@@ -46,6 +46,9 @@ export default {
         .catch((error) => {
           console.error('Error fetching topics:', error);
         });
+    },
+    handleTopicDeleted(topicId) {
+      this.topics = this.topics.filter((topic) => topic.id !== topicId);
     },
   },
 };

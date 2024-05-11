@@ -1,7 +1,7 @@
 <template>
   <div>
     <TopicStarter :topic-id="topicId" />
-    <PostList :posts="posts" />
+    <PostList :posts="posts" @post-deleted="handlePostDeleted" />
     <CreatePostComponent
       v-if="isLoggedIn"
       :topic-id="topicId"
@@ -47,6 +47,9 @@ export default {
         .catch((error) => {
           console.error('Error fetching posts:', error);
         });
+    },
+    handlePostDeleted(postId) {
+      this.posts = this.posts.filter((post) => post.id !== postId);
     },
   },
 };

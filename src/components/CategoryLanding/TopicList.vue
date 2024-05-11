@@ -42,9 +42,19 @@
               </div>
             </div>
             <div class="flex flex-column md:align-items-end gap-5">
-              <span class="text-xl font-semibold text-900">
-                Posts: {{ item.postCount }}
-              </span>
+              <div>
+                <span class="text-xl font-semibold text-900">
+                  Posts: {{ item.postCount }}
+                </span>
+              </div>
+              <div>
+                <Button
+                  v-if="isAdmin"
+                  label="Delete Topic"
+                  class="p-button-rounded p-button-danger"
+                  @click="deleteTopic(item.id)">
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -57,6 +67,8 @@
 import DataView from 'primevue/dataview';
 import Dropdown from 'primevue/dropdown';
 import { formatDateTime } from '@/utils/dateUtils';
+import { mapGetters } from 'vuex';
+import axios from 'axios';
 
 export default {
   components: {
@@ -86,6 +98,7 @@ export default {
     };
   },
   computed: {
+    ...mapGetters(['isAdmin']),
     sortedTopics() {
       return [...this.topics].sort((a, b) => {
         let comparison = 0;
@@ -100,13 +113,46 @@ export default {
   },
   methods: {
     onSortChange(event) {
-      console.log(event.value);
       this.sortOrder = event.value.value.order;
       this.sortField = event.value.value.field;
     },
     formatDateTime,
     goToTopic(topicId) {
       this.$router.push(`/forum/topics/${topicId}`);
+    },
+    deleteTopic(topicId) {
+      if (this.isAdmin) {
+        const jwt = localStorage.getItem('token');
+        axios
+          .delete(`/forum/topic/${topicId}`, {
+            headers: { Authorization: `Bearer ${jwt}` },
+          })
+          .then(() => {
+            this.$emit('topic-deleted', topicId);
+            this.$toast.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Topic deleted successfully',
+              life: 3000,
+            });
+          })
+          .catch((error) => {
+            console.error('Error deleting topic:', error);
+            this.$toast.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Failed to delete topic',
+              life: 3000,
+            });
+          });
+      } else {
+        this.$toast.add({
+          severity: 'warn',
+          summary: 'Unauthorized',
+          detail: 'You are not authorized to perform this action',
+          life: 3000,
+        });
+      }
     },
   },
 };

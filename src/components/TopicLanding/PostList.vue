@@ -18,6 +18,11 @@
               </div>
               <p class="mt-2">{{ item.body }}</p>
             </div>
+            <Button
+              v-if="isAdmin"
+              label="Delete Post"
+              class="p-button-rounded p-button-danger"
+              @click.stop="deletePost(item.id)" />
           </div>
         </div>
       </div>
@@ -28,6 +33,8 @@
 <script>
 import DataView from 'primevue/dataview';
 import { formatDateTime } from '@/utils/dateUtils';
+import { mapGetters } from 'vuex';
+import axios from 'axios';
 
 export default {
   components: {
@@ -36,8 +43,39 @@ export default {
   props: {
     posts: Array,
   },
+  computed: {
+    ...mapGetters(['isAdmin']),
+  },
   methods: {
     formatDateTime,
+    deletePost(postId) {
+      if (!this.isAdmin) {
+        return;
+      }
+      const jwt = localStorage.getItem('token');
+      axios
+        .delete(`/forum/post/${postId}`, {
+          headers: { Authorization: `Bearer ${jwt}` },
+        })
+        .then(() => {
+          this.$emit('post-deleted', postId);
+          this.$toast.add({
+            severity: 'success',
+            summary: 'Deleted',
+            detail: 'Post successfully deleted',
+            life: 3000,
+          });
+        })
+        .catch((error) => {
+          console.error('Error deleting post:', error);
+          this.$toast.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: 'Failed to delete post',
+            life: 3000,
+          });
+        });
+    },
   },
 };
 </script>
