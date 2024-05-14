@@ -67,6 +67,14 @@
             <span>Exercise plans</span>
           </a>
         </li>
+        <li>
+          <a
+            v-ripple
+            class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
+            @click="goToForum">
+            <span>Forum</span>
+          </a>
+        </li>
       </ul>
       <div
         class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
@@ -129,6 +137,9 @@ export default {
     },
     goArticles() {
       this.$router.push('/articles');
+    },
+    goToForum() {
+      this.$router.push('/forum/landing');
     },
     goToUserDashboard() {
       this.$router.push('/dashboard/user');

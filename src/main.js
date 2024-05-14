@@ -34,24 +34,37 @@ import { createStore } from 'vuex';
 import axios from 'axios';
 
 import '@/assets/styles.scss';
+import { jwtDecode } from 'jwt-decode';
 
 const store = createStore({
   state: {
     token: localStorage.getItem('token') || null,
+    roles: [],
   },
   mutations: {
     setToken(state, token) {
       state.token = token;
+      if (token) {
+        const decoded = jwtDecode(token);
+        state.roles = decoded.roles || []; // Assuming 'roles' is an array of roles
+      } else {
+        state.roles = [];
+      }
+      localStorage.setItem('token', token); // Ensure token is updated in localStorage
     },
     clearToken(state) {
       state.token = null;
+      state.roles = [];
       localStorage.removeItem('token');
     },
   },
-  actions: {},
   getters: {
     isLoggedIn(state) {
       return !!state.token;
+    },
+    isAdmin(state) {
+      console.log(state.roles);
+      return state.roles.includes('ADMIN');
     },
   },
 });
