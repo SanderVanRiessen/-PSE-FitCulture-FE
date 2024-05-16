@@ -63,8 +63,10 @@ const store = createStore({
       return !!state.token;
     },
     isAdmin(state) {
-      console.log(state.roles);
       return state.roles.includes('ADMIN');
+    },
+    isAuthor(state) {
+      return state.roles.includes('AUTHOR');
     },
   },
 });
