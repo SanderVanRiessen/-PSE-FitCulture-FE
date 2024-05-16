@@ -90,7 +90,7 @@ export const router = createRouter({
 router.beforeEach((to, from, next) => {
   const isPrivatePage = to.matched.some((record) => record.meta.requiresAuth);
   if (isPrivatePage && !localStorage.getItem('token')) {
-    next({ path: '/', name: 'default' });
+    next({ path: '/login', name: 'login' });
   } else {
     next();
   }
