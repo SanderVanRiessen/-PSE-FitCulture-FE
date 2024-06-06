@@ -32,10 +32,18 @@ describe('dateUtils', () => {
 
       const expectedDateObj = new Date(Date.UTC(2023, 5, 15, 12, 34, 56));
       const expectedDay = expectedDateObj.getDate().toString().padStart(2, '0');
-      const expectedMonth = (expectedDateObj.getMonth() + 1).toString().padStart(2, '0');
+      const expectedMonth = (expectedDateObj.getMonth() + 1)
+        .toString()
+        .padStart(2, '0');
       const expectedYear = expectedDateObj.getFullYear();
-      const expectedHours = expectedDateObj.getHours().toString().padStart(2, '0');
-      const expectedMinutes = expectedDateObj.getMinutes().toString().padStart(2, '0');
+      const expectedHours = expectedDateObj
+        .getHours()
+        .toString()
+        .padStart(2, '0');
+      const expectedMinutes = expectedDateObj
+        .getMinutes()
+        .toString()
+        .padStart(2, '0');
       const expectedFormattedDateTime = `${expectedDay}-${expectedMonth}-${expectedYear} ${expectedHours}:${expectedMinutes}`;
 
       expect(formattedDateTime).toBe(expectedFormattedDateTime);
