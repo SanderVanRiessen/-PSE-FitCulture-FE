@@ -10,7 +10,8 @@
     "lint": "vue-cli-service lint",
     "prettier:check": "prettier --check \"src/**/*.{js,vue}\"",
     "prettier:write": "prettier --write \"src/**/*.{js,vue}\"",
-    "test": "jest"
+    "test": "jest",
+    "sonar": "sonar-scanner"
   },
   "dependencies": {
     "@babel/preset-env": "^7.24.0",
