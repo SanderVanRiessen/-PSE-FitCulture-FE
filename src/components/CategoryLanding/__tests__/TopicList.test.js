@@ -11,7 +11,14 @@ import flushPromises from 'flush-promises';
 jest.mock('axios');
 
 const mockTopics = [
-  { id: 1, name: 'Topic 1', description: 'Description 1', createdAt: '2023-06-15T12:34:56Z', postCount: 5, username: 'user1' },
+  {
+    id: 1,
+    name: 'Topic 1',
+    description: 'Description 1',
+    createdAt: '2023-06-15T12:34:56Z',
+    postCount: 5,
+    username: 'user1',
+  },
 ];
 
 const store = createStore({
@@ -53,7 +60,10 @@ describe('TopicList', () => {
 
   it('emits event when delete button is clicked by an admin', async () => {
     // Locate the delete button for the topic with ID 1
-    const deleteButton = wrapper.findAllComponents(Button).filter(button => button.text() === 'Delete Topic').at(0);
+    const deleteButton = wrapper
+      .findAllComponents(Button)
+      .filter((button) => button.text() === 'Delete Topic')
+      .at(0);
 
     // Ensure the delete button is found
     expect(deleteButton.exists()).toBe(true);
