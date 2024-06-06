@@ -64,7 +64,7 @@ test:
 sonarcloud:
   stage: lint & test
   needs: [build]
-  image: timbru31/java-node
+  image: timbru31/java-node:18-jdk-11-temurin
   tags:
     - hva
   variables:
