@@ -75,7 +75,7 @@ sonarcloud:
     - pnpm config set store-dir .pnpm-store
     - pnpm install
   script:
-    - sonar-scanner
+    - pnpm run sonar
 
 docker-build:
   image: docker:25.0.3
