@@ -74,7 +74,6 @@ sonarcloud:
     - corepack prepare pnpm@latest --activate
     - pnpm config set store-dir .pnpm-store
     - pnpm install
-    - npm install -g sonar-scanner
   script:
     - sonar-scanner
 
