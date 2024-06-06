@@ -11,7 +11,6 @@ cache:
 stages:
   - build
   - lint & test
-  - sonarcloud
   - docker-build
   - deploy
 
@@ -63,19 +62,16 @@ test:
     - pnpm run test
 
 sonarcloud:
-  image: node:18
-  stage: sonarcloud
+  stage: lint & test
   needs: [build]
   extends: .install_pnpm
   tags:
     - hva
   variables:
     SONAR_SCANNER_OPTS: "-Xmx1024m"
-  before_script:
-    - pnpm install
-    - pnpm install -g sonarqube-scanner
   script:
     - pnpm run test:unit -- --coverage
+    - pnpm install -g sonarqube-scanner
     - sonar-scanner
 
 docker-build:
