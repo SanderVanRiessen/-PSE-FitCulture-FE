@@ -26,6 +26,7 @@
     "primeicons": "^6.0.1",
     "primevue": "^3.48.1",
     "serve": "^14.2.1",
+    "sonar-scanner": "^3.1.0",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5",
     "vue3-markdown-it": "^1.0.10",
