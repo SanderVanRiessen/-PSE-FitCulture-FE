@@ -11,6 +11,7 @@ cache:
 stages:
   - build
   - lint & test
+  - sonarcloud
   - docker-build
   - deploy
 
@@ -33,6 +34,7 @@ build:
     paths:
       - build/
       - node_modules/
+      - coverage/ # Ensure coverage reports are available for SonarCloud
 
 quality:
   stage: lint & test
@@ -60,18 +62,23 @@ test:
     - hva
   script:
     - pnpm run test
+  artifacts:
+    expire_in: 3 days
+    paths:
+      - coverage/ # Ensure coverage reports are available for SonarCloud
 
 sonarcloud:
-  stage: lint & test
-  needs: [build]
+  image: node:18
+  stage: sonarcloud
+  needs: [test]
   extends: .install_pnpm
   tags:
     - hva
   variables:
     SONAR_SCANNER_OPTS: "-Xmx1024m"
-  script:
-    - pnpm run test:unit -- --coverage
+  before_script:
     - pnpm install -g sonarqube-scanner
+  script:
     - sonar-scanner
 
 docker-build:
