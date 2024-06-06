@@ -69,8 +69,7 @@ sonarcloud:
     - hva
   variables:
     SONAR_SCANNER_OPTS: "-Xmx1024m"
-  script: #comment to build
-    - pnpm install -g sonarqube-scanner
+  script:
     - sonar-scanner
 
 docker-build:
