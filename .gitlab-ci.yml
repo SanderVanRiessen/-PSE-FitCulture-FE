@@ -70,6 +70,7 @@ sonarcloud:
   variables:
     SONAR_SCANNER_OPTS: "-Xmx1024m"
   script:
+    - chmod +x node_modules/.pnpm/sonar-scanner@3.1.0/node_modules/sonar-scanner/bin/sonar-scanner
     - pnpm sonar-scanner
 
 docker-build:
