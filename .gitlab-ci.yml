@@ -32,8 +32,8 @@ build:
   tags:
     - hva
   script:
-    - docker build -t your-docker-registry/your-image-name:tag .
-    - docker push your-docker-registry/your-image-name:tag
+    - pnpm install
+    - pnpm run build
   artifacts:
     expire_in: 3 days
     paths:
