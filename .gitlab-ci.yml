@@ -1,4 +1,10 @@
-image: node:18
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay2
 
 cache:
   key:
@@ -11,6 +17,7 @@ cache:
 stages:
   - build
   - lint & test
+  - sonar
   - docker-build
   - deploy
 
@@ -23,11 +30,9 @@ stages:
 build:
   stage: build
   extends: .install_pnpm
-  tags:
-    - hva
   script:
-    - pnpm install
-    - pnpm run build
+    - docker build -t your-docker-registry/your-image-name:tag .
+    - docker push your-docker-registry/your-image-name:tag
   artifacts:
     expire_in: 3 days
     paths:
@@ -38,8 +43,6 @@ quality:
   stage: lint & test
   needs: [build]
   extends: .install_pnpm
-  tags:
-    - hva
   script:
     - pnpm run lint
 
@@ -47,8 +50,6 @@ prettier:
   stage: lint & test
   needs: [build]
   extends: .install_pnpm
-  tags:
-    - hva
   script:
     - pnpm run prettier:check
 
@@ -56,47 +57,36 @@ test:
   stage: lint & test
   needs: [build]
   extends: .install_pnpm
-  tags:
-    - hva
   script:
     - pnpm run test
 
 sonarcloud:
-  stage: lint & test
+  stage: sonar
   needs: [build]
   extends: .install_pnpm
-  tags:
-    - hva
   variables:
     SONAR_SCANNER_OPTS: "-Xmx1024m"
-  before_script:
-    - corepack enable
-    - corepack prepare pnpm@latest --activate
-    - pnpm config set store-dir .pnpm-store
-    - pnpm install
-    - npm install -g sonar-scanner
   script:
     - sonar-scanner
+  only:
+    - merge_requests
+    - master
 
 docker-build:
-  image: docker:25.0.3
+  image: docker:latest
   stage: docker-build
   needs: [build]
-  tags:
-    - hva
   only:
     - main
   script:
-    - docker login gitlab.fdmci.hva.nl:5050 -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-    - docker build -t gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe .
-    - docker push gitlab.fdmci.hva.nl:5050/project-se-dt/2324/team5/pse-fitculture-fe
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker build -t $CI_REGISTRY_IMAGE .
+    - docker push $CI_REGISTRY_IMAGE
 
 deploy-job:
   stage: deploy
   needs: [build]
   image: ruby:2.7
-  tags:
-    - hva
   script:
     - apt-get update -qq && apt-get install -y curl git
     - curl https://cli-assets.heroku.com/install.sh | sh
