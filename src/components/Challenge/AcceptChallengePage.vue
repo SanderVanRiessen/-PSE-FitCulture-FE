@@ -20,7 +20,7 @@ import { ref } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
-import { acceptChallenge } from '@/services/challengeService';
+import { acceptChallenge } from '@/api/challenge/challengeService';
 
 export default {
   name: 'AcceptChallengePage',

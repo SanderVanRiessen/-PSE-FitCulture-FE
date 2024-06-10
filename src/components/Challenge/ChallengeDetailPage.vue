@@ -1,56 +1,113 @@
 <template>
   <div>
-    <h1>Challenge Details</h1>
-    <div v-if="challenge">
-      <p><strong>Name:</strong> {{ challenge.name }}</p>
-      <p><strong>Description:</strong> {{ challenge.description }}</p>
-      <p><strong>Start Date:</strong> {{ formatDate(challenge.startDate) }}</p>
-      <p><strong>End Date:</strong> {{ formatDate(challenge.endDate) }}</p>
-      <p><strong>Status:</strong> {{ challenge.status }}</p>
-      <h3>Participants</h3>
-      <ul>
-        <li v-for="participant in challenge.participants" :key="participant.id">
-          {{ participant.name }}
-        </li>
-      </ul>
-    </div>
+    <h1>Create Challenge</h1>
+    <form @submit.prevent="submitChallenge">
+      <div>
+        <label for="name">Name</label>
+        <InputText id="name" v-model="form.name" required />
+      </div>
+      <div>
+        <label for="description">Description</label>
+        <InputText id="description" v-model="form.description" required />
+      </div>
+      <div>
+        <label for="exercisePlanId">Exercise Plan</label>
+        <Dropdown
+          :options="exercisePlans"
+          optionLabel="name"
+          v-model="form.exercisePlanId"
+          required />
+      </div>
+      <div>
+        <label for="challengerUsername">Challenger Username</label>
+        <InputText
+          id="challengerUsername"
+          v-model="form.challengerUsername"
+          required />
+      </div>
+      <div>
+        <label for="startDate">Start Date</label>
+        <Calendar id="startDate" v-model="form.startDate" required />
+      </div>
+      <div>
+        <label for="endDate">End Date</label>
+        <Calendar id="endDate" v-model="form.endDate" required />
+      </div>
+      <Button label="Create" type="submit" />
+    </form>
   </div>
 </template>
 
 <script>
 import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
 import { useToast } from 'primevue/usetoast';
-import { formatDate } from '@/utils/dateutil';
-import { getChallengeById } from '@/services/challengeService';
+import InputText from 'primevue/inputtext';
+import Dropdown from 'primevue/dropdown';
+import Calendar from 'primevue/calendar';
+import Button from 'primevue/button';
+import { createChallenge } from '@/api/challenge/challengeService';
+import exerciseplansFetch from '@/api/exerciseplan/exerciseplansFetch';
 
 export default {
-  name: 'ChallengeDetailPage',
+  name: 'CreateChallengePage',
+  components: {
+    InputText,
+    Dropdown,
+    Calendar,
+    Button,
+  },
   setup() {
-    const route = useRoute();
-    const challenge = ref(null);
+    const form = ref({
+      name: '',
+      description: '',
+      exercisePlanId: null,
+      challengerUsername: '',
+      startDate: null,
+      endDate: null,
+    });
+    const exercisePlans = ref([]);
     const toast = useToast();
     const jwt = localStorage.getItem('token'); // Retrieve the JWT token
 
-    const fetchChallenge = async () => {
+    const fetchExercisePlans = async () => {
       try {
-        const data = await getChallengeById(jwt, route.params.id);
-        challenge.value = data;
+        const response = await exerciseplansFetch(jwt);
+        exercisePlans.value = response;
       } catch (error) {
         toast.add({
           severity: 'error',
           summary: 'Error',
-          detail: 'Failed to fetch challenge details',
+          detail: 'Failed to fetch exercise plans',
           life: 3000,
         });
       }
     };
 
-    onMounted(fetchChallenge);
+    const submitChallenge = async () => {
+      try {
+        await createChallenge(jwt, form.value);
+        toast.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Challenge created successfully',
+          life: 3000,
+        });
+      } catch (error) {
+        toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to create challenge',
+          life: 3000,
+        });
+      }
+    };
+
+    onMounted(fetchExercisePlans);
 
     return {
-      challenge,
-      formatDate,
+      form,
+      exercisePlans,
+      submitChallenge,
     };
   },
 };

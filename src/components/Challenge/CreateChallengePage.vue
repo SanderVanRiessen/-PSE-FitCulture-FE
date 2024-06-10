@@ -45,8 +45,8 @@ import InputText from 'primevue/inputtext';
 import Dropdown from 'primevue/dropdown';
 import Calendar from 'primevue/calendar';
 import Button from 'primevue/button';
-import { createChallenge } from '@/services/challengeService';
-import { getExercisePlans } from '@/services/exercisePlanService';
+import { createChallenge } from '@/api/challenge/challengeService';
+import { getExercisePlans } from '@/api/exerciseplan/exerciseplansFetch';
 
 export default {
   name: 'CreateChallengePage',

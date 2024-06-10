@@ -16,19 +16,19 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, h } from 'vue';
 import { useToast } from 'primevue/usetoast';
 import Button from 'primevue/button';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import { formatDate } from '@/utils/dateutil';
+import { formatDate } from '@/utils/dateUtils';
 import { useRouter } from 'vue-router';
-import { getChallenges } from '@/services/challengeService';
-import { h } from 'vue';
+import { getChallenges } from '@/api/challenge/challengeService';
 
 export default {
   name: 'ChallengeListPage',
   components: {
+    // eslint-disable-next-line
     Button,
     DataTable,
     Column,
