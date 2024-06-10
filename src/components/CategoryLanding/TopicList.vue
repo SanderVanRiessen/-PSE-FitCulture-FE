@@ -66,9 +66,9 @@
 <script>
 import DataView from 'primevue/dataview';
 import Dropdown from 'primevue/dropdown';
-import { formatDateTime } from '@/utils/dateUtils';
 import { mapGetters } from 'vuex';
 import axios from 'axios';
+import { formatDateTime } from '@/utils/dateUtils';
 
 export default {
   components: {
