@@ -4,7 +4,10 @@
     <DataTable :value="challenges" :loading="loading" class="p-datatable-sm">
       <Column field="name" header="Name"></Column>
       <Column field="description" header="Description"></Column>
-      <Column field="startDate" header="Start Date" :body="formatDateCell"></Column>
+      <Column
+        field="startDate"
+        header="Start Date"
+        :body="formatDateCell"></Column>
       <Column field="endDate" header="End Date" :body="formatDateCell"></Column>
       <Column field="status" header="Status"></Column>
       <Column header="Actions" :body="actionTemplate"></Column>
@@ -28,7 +31,7 @@ export default {
   components: {
     Button,
     DataTable,
-    Column
+    Column,
   },
   setup() {
     const challenges = ref([]);
@@ -42,7 +45,12 @@ export default {
         const data = await getChallenges(jwt);
         challenges.value = data;
       } catch (error) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch challenges', life: 3000 });
+        toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to fetch challenges',
+          life: 3000,
+        });
       } finally {
         loading.value = false;
       }
@@ -59,7 +67,7 @@ export default {
     const actionTemplate = (rowData) => {
       return h(Button, {
         label: 'View',
-        onClick: () => viewChallenge(rowData.id)
+        onClick: () => viewChallenge(rowData.id),
       });
     };
 
@@ -68,7 +76,7 @@ export default {
       loading,
       formatDateCell,
       actionTemplate,
-      viewChallenge
+      viewChallenge,
     };
   },
 };

@@ -12,11 +12,18 @@
       </div>
       <div>
         <label for="exercisePlanId">Exercise Plan</label>
-        <Dropdown :options="exercisePlans" optionLabel="name" v-model="form.exercisePlanId" required />
+        <Dropdown
+          :options="exercisePlans"
+          optionLabel="name"
+          v-model="form.exercisePlanId"
+          required />
       </div>
       <div>
         <label for="challengerUsername">Challenger Username</label>
-        <InputText id="challengerUsername" v-model="form.challengerUsername" required />
+        <InputText
+          id="challengerUsername"
+          v-model="form.challengerUsername"
+          required />
       </div>
       <div>
         <label for="startDate">Start Date</label>
@@ -47,7 +54,7 @@ export default {
     InputText,
     Dropdown,
     Calendar,
-    Button
+    Button,
   },
   setup() {
     const form = ref({
@@ -56,7 +63,7 @@ export default {
       exercisePlanId: null,
       challengerUsername: '',
       startDate: null,
-      endDate: null
+      endDate: null,
     });
     const exercisePlans = ref([]);
     const toast = useToast();
@@ -67,16 +74,31 @@ export default {
         const response = await getExercisePlans(jwt);
         exercisePlans.value = response;
       } catch (error) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch exercise plans', life: 3000 });
+        toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to fetch exercise plans',
+          life: 3000,
+        });
       }
     };
 
     const submitChallenge = async () => {
       try {
         await createChallenge(jwt, form.value);
-        toast.add({ severity: 'success', summary: 'Success', detail: 'Challenge created successfully', life: 3000 });
+        toast.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Challenge created successfully',
+          life: 3000,
+        });
       } catch (error) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to create challenge', life: 3000 });
+        toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to create challenge',
+          life: 3000,
+        });
       }
     };
 
@@ -85,7 +107,7 @@ export default {
     return {
       form,
       exercisePlans,
-      submitChallenge
+      submitChallenge,
     };
   },
 };

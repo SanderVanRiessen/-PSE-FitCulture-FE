@@ -37,7 +37,12 @@ export default {
         const data = await getChallengeById(jwt, route.params.id);
         challenge.value = data;
       } catch (error) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to fetch challenge details', life: 3000 });
+        toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to fetch challenge details',
+          life: 3000,
+        });
       }
     };
 
@@ -45,7 +50,7 @@ export default {
 
     return {
       challenge,
-      formatDate
+      formatDate,
     };
   },
 };

@@ -26,12 +26,12 @@ export default {
   name: 'AcceptChallengePage',
   components: {
     InputText,
-    Button
+    Button,
   },
   setup() {
     const form = ref({
       challengeId: '',
-      username: ''
+      username: '',
     });
     const toast = useToast();
     const jwt = localStorage.getItem('token'); // Retrieve the JWT token
@@ -39,15 +39,25 @@ export default {
     const acceptChallengeAction = async () => {
       try {
         await acceptChallenge(jwt, form.value);
-        toast.add({ severity: 'success', summary: 'Success', detail: 'Challenge accepted successfully', life: 3000 });
+        toast.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Challenge accepted successfully',
+          life: 3000,
+        });
       } catch (error) {
-        toast.add({ severity: 'error', summary: 'Error', detail: 'Failed to accept challenge', life: 3000 });
+        toast.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Failed to accept challenge',
+          life: 3000,
+        });
       }
     };
 
     return {
       form,
-      acceptChallengeAction
+      acceptChallengeAction,
     };
   },
 };
