@@ -14,10 +14,10 @@ import MyExercisePlanDetailPage from '@/views/MyExercisePlanDetailPage.vue';
 import ForumLanding from '@/views/Forum/ForumLanding.vue';
 import CategoryLanding from '@/views/Forum/CategoryLanding.vue';
 import TopicLanding from '@/views/Forum/TopicLanding.vue';
-import ChallengeListPage from '@/views/ChallengeListPage.vue';
-import ChallengeDetailPage from '@/views/ChallengeDetailPage.vue';
-import CreateChallengePage from '@/views/CreateChallengePage.vue';
-import AcceptChallengePage from '@/views/AcceptChallengePage.vue';
+import ChallengeListPage from '@/views/Challenge/ChallengeListPage.vue';
+import ChallengeDetailPage from '@/views/Challenge/ChallengeDetailPage.vue';
+import CreateChallengePage from '@/views/Challenge/CreateChallengePage.vue';
+import AcceptChallengePage from '@/views/Challenge/AcceptChallengePage.vue';
 
 const routes = [
   { path: '/', name: 'default', component: LandingPage },
