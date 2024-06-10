@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Accept Challenge</h1>
-    <form @submit.prevent="acceptChallenge">
+    <form @submit.prevent="acceptChallengeAction">
       <div>
         <label for="challengeId">Challenge ID</label>
         <InputText id="challengeId" v-model="form.challengeId" required />

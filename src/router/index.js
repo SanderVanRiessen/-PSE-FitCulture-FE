@@ -84,10 +84,30 @@ const routes = [
     component: ExercisePlanDetailPage,
     meta: { requiresAuth: true },
   },
-  { path: '/challenges', name: 'challenges', component: ChallengeListPage, meta: { requiresAuth: true } },
-  { path: '/challenge/:id', name: 'challengeDetail', component: ChallengeDetailPage, meta: { requiresAuth: true } },
-  { path: '/create-challenge', name: 'createChallenge', component: CreateChallengePage, meta: { requiresAuth: true } },
-  { path: '/accept-challenge', name: 'acceptChallenge', component: AcceptChallengePage, meta: { requiresAuth: true } },
+  {
+    path: '/challenges',
+    name: 'challenges',
+    component: ChallengeListPage,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/challenge/:id',
+    name: 'challengeDetail',
+    component: ChallengeDetailPage,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/create-challenge',
+    name: 'createChallenge',
+    component: CreateChallengePage,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/accept-challenge',
+    name: 'acceptChallenge',
+    component: AcceptChallengePage,
+    meta: { requiresAuth: true },
+  },
 ];
 
 export const router = createRouter({
