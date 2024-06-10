@@ -90,7 +90,7 @@ export default {
         switch (status) {
           case 'Todo':
             return 'TODO';
-          case 'In progress':
+          case 'Inprogress':
             return 'INPROGRESS';
           case 'Done':
             return 'DONE';
