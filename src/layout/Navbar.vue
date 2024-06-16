@@ -35,7 +35,7 @@
             <span>Articles</span>
           </a>
         </li>
-        <li>
+        <li v-if="isAdmin">
           <a
             v-ripple
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
@@ -43,7 +43,7 @@
             <span>Users</span>
           </a>
         </li>
-        <li>
+        <li v-if="isAdmin">
           <a
             v-ripple
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
@@ -51,7 +51,7 @@
             <span>Exercise plans</span>
           </a>
         </li>
-        <li>
+        <li v-if="!isAdmin">
           <a
             v-ripple
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
@@ -59,7 +59,7 @@
             <span>My exercise plans</span>
           </a>
         </li>
-        <li>
+        <li v-if="!isAdmin">
           <a
             v-ripple
             class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple"
@@ -112,7 +112,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['isLoggedIn']),
+    ...mapGetters(['isLoggedIn', 'isAdmin', 'isAuthor']),
   },
   methods: {
     ...mapMutations(['clearToken']),
